@@ -26,7 +26,7 @@ public class KaKaoAuthService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=3636ffa50d28afafd41c5a0c184f8210");
-            sb.append("&redirect_url=https://192.168.0.97:8090/kakao");
+            sb.append("&redirect_url=https://192.168.0.97:8092/kakao");
             sb.append("&code="+code);
             bw.write(sb.toString());
             bw.flush();
