@@ -1,9 +1,7 @@
 package com.demo.KaKao.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.demo.KaKao.vo.TokenVo;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,36 +9,35 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
-@Getter
-@ToString
-@NoArgsConstructor(access = PROTECTED)
-@Table(name = "token")
+@Data
+//@NoArgsConstructor(access = PROTECTED)
+@NoArgsConstructor
+@Table(name = "login_token")
 public class TokenEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String accessToken;
+    private String accesstoken;
 
     @Column(nullable = false)
-    private String refreshToken;
+    private String refreshtoken;
 
     @Column(nullable = false)
-    private Integer refreshTokenExpiresIn;
+    private Integer refreshtokenexpiresin;
 
     @Column(nullable = false)
-    private String loginYn;
+    private String loginyn;
 
     @Column(nullable = false)
-    private String loginTime;
+    private String logintime;
 
-    @Builder
-    public TokenEntity(String accessToken, String refreshToken, Integer refreshTokenExpiresIn, String loginYn, String loginTime) {
-        this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
-        this.refreshTokenExpiresIn = refreshTokenExpiresIn;
-        this.loginYn = loginYn;
-        this.loginTime=loginTime;
-    }
+//    public TokenEntity(TokenVo vo) {
+//        this.accesstoken = vo.getAccessToken();
+//        this.refreshtoken = vo.getAccessToken();
+//        this.refreshtokenexpiresIn = vo.getRefreshTokenExpiresIn();
+//        this.loginyn = vo.getLoginYn();
+//        this.logintime = vo.getAccessToken();
+//    }
 }

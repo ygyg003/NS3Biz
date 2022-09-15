@@ -33,7 +33,7 @@ public class ApiService {
     private final EventCodeRepository codeRepository;
     public ResponseEntity<?> saveData(MultipartHttpServletRequest request)throws Exception{
 
-        System.out.println("===================== Data push =====================");
+        log.info("======== Data push ===========");
         MultipartFile snap = request.getFile("snap");
         String json = request.getParameter("json");
         JsonNode parent = new ObjectMapper().readTree(json);
@@ -55,8 +55,8 @@ public class ApiService {
                 String data = String.valueOf(parent.findValue("data"));
                 ApiBodyVo vo = ob.readValue(data, ApiBodyVo.class);
                 if( !vo.getEvents_type().isEmpty()){
-                    System.out.println("Event Data Pushed");
-                    System.out.println("Body vo::" + vo);
+                    log.info("Event Data Pushed");
+//                    log.info("Body vo::" + vo);
 
                     String deviceID = vo.getDevice_id();
                     String cameraID = vo.getCamera_name();
@@ -78,8 +78,7 @@ public class ApiService {
             }
         }
         else{
-            System.out.println("HeartBeat");
-            System.out.println(json);
+            log.info("HeartBeat");
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -92,23 +91,23 @@ public class ApiService {
         return imageByte;
     }
 
-    @Scheduled(cron = "30 * * * * *")
-    public void scheduleTest(){
-        log.info("SCHEDULING TEST");
-        List<Ns3Entity> list = repository.findByFlag("N");  //msg전송안한 데이터 가져옴
-        if(list.isEmpty()){
-            System.out.println("No events occured");
-        }
-        else{
-            for(Ns3Entity entity:list){
-                EventCodeEntity codelist = codeRepository.findByEventtype(entity.getEvents_type()).orElseThrow();
-                System.out.println("events message::"+codelist.getEventvalue());
-                entity.setFlag("Y");
-                repository.save(entity);
-
-            }
-        }
-
-    }
+//    @Scheduled(cron = "30 * * * * *")
+//    public void scheduleTest(){
+//        log.info("SCHEDULING TEST");
+//        List<Ns3Entity> list = repository.findByFlag("N");  //msg전송안한 데이터 가져옴
+//        if(list.isEmpty()){
+//            System.out.println("No events occured");
+//        }
+//        else{
+//            for(Ns3Entity entity:list){
+//                EventCodeEntity codelist = codeRepository.findByEventtype(entity.getEvents_type()).orElseThrow();
+//                System.out.println("events message::"+codelist.getEventvalue());
+//                entity.setFlag("Y");
+//                repository.save(entity);
+//
+//            }
+//        }
+//
+//    }
 
 }

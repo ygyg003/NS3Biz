@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,7 +42,7 @@ public class KaKaoLogin extends HttpCallService {
     @RequestMapping(value = "/login/getKakaoAuthUrl")
     public @ResponseBody String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
         log.info("통신시작");
-        String reqUrl = kakaoAuthUrl + "/oauth/authorize?client_id="+kakaoApi+"&redirect_uri="+redriectURI+"&response_type=code";
+        String reqUrl = kakaoAuthUrl + "/oauth/authorize?client_id="+kakaoApi+"&redirect_uri="+redriectURI+"&response_type=code&scope=talk_message";
         return reqUrl;
     }
     // 카카오 연동정보 조회
@@ -70,6 +72,7 @@ public class KaKaoLogin extends HttpCallService {
         parameters.add("grant_type","authorization_code");
         parameters.add("client_id","3636ffa50d28afafd41c5a0c184f8210");
         parameters.add("redirect_url","http://localhost:8092");
+        parameters.add("scope","talk_message");
         parameters.add("client_secret","huknc0RAJguKW26UgoW75TO0V3B6gee2");
 
         HttpEntity<?> requestEntity = httpClientEntity(header,parameters);
@@ -85,9 +88,16 @@ public class KaKaoLogin extends HttpCallService {
             return "토큰 발급 실패";
         }else {
             log.debug("토큰 발급");
-//            TokenVo dto = new TokenVo();
+            TokenVo dto = new TokenVo();
 //            TokenEntity token = dto.toEntity(accessToken, refreshToken, refresh_token_expires_in, "Y");
-//            tokenRepository.save(token);
+            TokenEntity entity = new TokenEntity();
+            entity.setAccesstoken(accessToken);
+            entity.setRefreshtoken(refreshToken);
+            entity.setRefreshtokenexpiresin(Integer.parseInt(refresh_token_expires_in));
+            entity.setLogintime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")));
+            entity.setLoginyn("Y");
+
+            tokenRepository.save(entity);
             System.out.println(accessToken);
             return accessToken;
         }

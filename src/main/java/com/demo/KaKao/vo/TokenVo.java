@@ -17,15 +17,15 @@ public class TokenVo {
     private String accessToken;
     private String refreshToken;
     private Integer refreshTokenExpiresIn;
-    private String loginYn;
-
-    public TokenEntity toEntity(String accessToken, String refreshToken, String refreshTokenExpiresIn, String loginYn) {
-        return TokenEntity.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .refreshTokenExpiresIn(Integer.valueOf(refreshTokenExpiresIn))
-                .loginYn("Y")
-                .loginTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")))
-                .build();
-    }
+//    private String loginYn;
+//
+//    public TokenEntity toEntity(String accessToken, String refreshToken, String refreshTokenExpiresIn, String loginYn) {
+//        return TokenEntity.builder()
+//                .accesstoken(accessToken)
+//                .refreshToken(refreshToken)
+//                .refreshTokenExpiresIn(Integer.valueOf(refreshTokenExpiresIn))
+//                .loginYn("Y")
+//                .loginTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")))
+//                .build();
+//    }
 }
