@@ -30,6 +30,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ApiService {
     private final Ns3Repository repository;
+    private final BodyRepository bodyRepository;
     private final EventCodeRepository codeRepository;
     public ResponseEntity<?> saveData(MultipartHttpServletRequest request)throws Exception{
 
@@ -54,6 +55,7 @@ public class ApiService {
             else {                                            //Body
                 String data = String.valueOf(parent.findValue("data"));
                 ApiBodyVo vo = ob.readValue(data, ApiBodyVo.class);
+
                 if( !vo.getEvents_type().isEmpty()){
                     log.info("Event Data Pushed");
 //                    log.info("Body vo::" + vo);
@@ -71,9 +73,12 @@ public class ApiService {
                     }catch (NullPointerException e){
                         System.out.println("Snap not exist");
                     }
-                    Ns3Entity entity = new Ns3Entity(vo);
-                    entity.setSnap_path(imagePath+File.separator+filename);
-                    repository.save(entity);
+                    BodyEntity entity = new BodyEntity(vo);
+//                    Ns3Entity entity = new Ns3Entity(vo);
+//                    entity.setSnap_path(imagePath+File.separator+filename);
+//                    repository.save(entity);
+                    entity.setSnap_feat(imagePath+File.separator+filename);
+                    bodyRepository.save(entity);
                 }
             }
         }

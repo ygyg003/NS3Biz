@@ -1,18 +1,20 @@
 package com.demo.NS3.entity;
 
 import com.demo.NS3.vo.ApiBodyVo;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+
+import java.time.LocalDateTime;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
 @Entity
-@NoArgsConstructor
-@Table(name = "body_test")
-public class BodyEntity {
+@AllArgsConstructor
+@Table(name = "std_event_record_push")
+public class BodyEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long Id;
@@ -35,6 +37,9 @@ public class BodyEntity {
     private String snap_path;
     private Long position;
     private String trigger;
+//    @CreatedDate
+//    @Column(updatable = false)
+//    private LocalDateTime if_date;
     public BodyEntity(ApiBodyVo vo) {
         this.cameraname = vo.getCamera_name();
         this.deviceid = vo.getDevice_id();
