@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface BodyRepository extends JpaRepository<BodyEntity,Long> {
     Optional<BodyEntity> findByDeviceidAndCameranameAndTrigger(String device_id, String camera_name, String trigger);
+    Optional<BodyEntity> findBySnapid(String snap_id);
 }

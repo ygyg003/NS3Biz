@@ -33,7 +33,8 @@ public class BodyEntity extends BaseEntity{
     private Long pos_right;
     private Long quality;
     private String snap_feat;
-    private String snap_id;
+    @Column(name = "snap_id")
+    private String snapid;
     private String snap_path;
     private Long position;
     private String trigger;
@@ -54,7 +55,7 @@ public class BodyEntity extends BaseEntity{
         this.pos_right = vo.getPos_right();
         this.quality = vo.getQuality();
         this.snap_feat = vo.getSnap_feat();
-        this.snap_id = vo.getSnap_id();
+        this.snapid = vo.getSnap_id();
         this.snap_path = vo.getSnap_path();
         this.position = vo.getChannel();
         this.trigger = vo.getTrigger();

@@ -88,31 +88,19 @@ public class ApiService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public @ResponseBody byte[] getImage(String deviceID, String cameraname, String date) throws IOException {
-        BodyEntity entity = bodyRepository.findByDeviceidAndCameranameAndTrigger(deviceID, cameraname, date).orElseThrow();
+//    public @ResponseBody byte[] getImage(String deviceID, String cameraname, String date) throws IOException {
+//        BodyEntity entity = bodyRepository.findByDeviceidAndCameranameAndTrigger(deviceID, cameraname, date).orElseThrow();
+//        String pathdata = entity.getSnap_feat();
+//        InputStream is = new FileInputStream(pathdata);
+//        byte[] imageByte = is.readAllBytes();
+//        return imageByte;
+//    }
+    public @ResponseBody byte[] getImage(String snapid) throws IOException {
+        BodyEntity entity = bodyRepository.findBySnapid(snapid).orElseThrow();
         String pathdata = entity.getSnap_feat();
         InputStream is = new FileInputStream(pathdata);
         byte[] imageByte = is.readAllBytes();
         return imageByte;
     }
-
-//    @Scheduled(cron = "30 * * * * *")
-//    public void scheduleTest(){
-//        log.info("SCHEDULING TEST");
-//        List<Ns3Entity> list = repository.findByFlag("N");  //msg전송안한 데이터 가져옴
-//        if(list.isEmpty()){
-//            System.out.println("No events occured");
-//        }
-//        else{
-//            for(Ns3Entity entity:list){
-//                EventCodeEntity codelist = codeRepository.findByEventtype(entity.getEvents_type()).orElseThrow();
-//                System.out.println("events message::"+codelist.getEventvalue());
-//                entity.setFlag("Y");
-//                repository.save(entity);
-//
-//            }
-//        }
-//
-//    }
 
 }

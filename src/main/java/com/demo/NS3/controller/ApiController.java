@@ -23,9 +23,8 @@ public class ApiController {
         return service.saveData(request);
     }
 
-    @GetMapping(value = "/img/{deviceId}/{cameraname}/{date}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getImage(@PathVariable(value = "deviceId") String deviceId, @PathVariable(value = "cameraname") String cameraname,
-                                  @PathVariable(value = "date")String date) throws IOException {
-        return service.getImage(deviceId,cameraname,date);
+    @GetMapping(value = "/img/{snapid}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody byte[] getImage(@PathVariable(value = "snapid") String snapid )throws IOException {
+        return service.getImage(snapid);
     }
 }
