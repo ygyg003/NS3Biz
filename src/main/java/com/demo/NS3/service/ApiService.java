@@ -89,8 +89,8 @@ public class ApiService {
     }
 
     public @ResponseBody byte[] getImage(String deviceID, String cameraname, String date) throws IOException {
-        Ns3Entity entity = repository.findByDeviceidAndCameranameAndTrigger(deviceID, cameraname, date).orElseThrow();
-        String pathdata = entity.getSnap_path();
+        BodyEntity entity = bodyRepository.findByDeviceidAndCameranameAndTrigger(deviceID, cameraname, date).orElseThrow();
+        String pathdata = entity.getSnap_feat();
         InputStream is = new FileInputStream(pathdata);
         byte[] imageByte = is.readAllBytes();
         return imageByte;

@@ -19,6 +19,7 @@ public class ApiController {
 
     @PostMapping("/test")
     public ResponseEntity<?> test(@NotNull MultipartHttpServletRequest request) throws Exception {
+        System.out.println(request.getRemoteAddr());
         return service.saveData(request);
     }
 

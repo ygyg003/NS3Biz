@@ -12,7 +12,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
 @Entity
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "std_event_record_push")
 public class BodyEntity extends BaseEntity{
     @Id
