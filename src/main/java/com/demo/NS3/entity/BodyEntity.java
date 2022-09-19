@@ -38,6 +38,8 @@ public class BodyEntity extends BaseEntity{
     private String snap_path;
     private Long position;
     private String trigger;
+    @Column(name = "send_flag")
+    private String sendflag;
 //    @CreatedDate
 //    @Column(updatable = false)
 //    private LocalDateTime if_date;
@@ -59,5 +61,6 @@ public class BodyEntity extends BaseEntity{
         this.snap_path = vo.getSnap_path();
         this.position = vo.getChannel();
         this.trigger = vo.getTrigger();
+        this.sendflag="Y";
     }
 }

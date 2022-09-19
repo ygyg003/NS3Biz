@@ -18,7 +18,7 @@ public class SendMessageService extends HttpCallService {
     private static final String SEND_SUCCESS_MSG = "메시지 전송에 성공했습니다.";
     private static final String SEND_FAIL_MSG = "메시지 전송에 실패했습니다.";
     private static final String SUCCESS_CODE = "0"; // Kakao api 에서 return 하는 success_code 값.
-    public boolean sendMessage(String accessToken,String device, String camera, String msg, String site,String occurTime) {
+    public boolean sendMessage(String accessToken,String device, String camera, String msg, String site,String occurTime,String snapid) {
         // 사용자 정의 템플릿은 template_id만
 //        JSONObject templateObj = new JSONObject();
 //        templateObj.put("template_id","82472");
@@ -28,8 +28,8 @@ public class SendMessageService extends HttpCallService {
         header.set("Authorization", "Bearer "+accessToken); // 두 개는 괜찮음  두 개에 template id만 담아서 httpCall
 
         JSONObject argsObj = new JSONObject();
-        argsObj.put("THU","https://ifh.cc/g/APBkvM.jpg");
-//        argsObj.put("THU","{http://localhost:8092/img/office2/Face+Bodytest/2022-09-13%2010:37:09}");//TODO:API path로 가져오게 수정해야함
+//        argsObj.put("THU","https://ifh.cc/g/APBkvM.jpg");
+        argsObj.put("THU","211.111.12.131:8092/img/"+snapid+"");//TODO:API path로 가져오게 수정해야함
         argsObj.put("HEADER",msg);
         argsObj.put("TITLE",site);
         argsObj.put("DESC",device+"//"+camera+"\n"+occurTime);
